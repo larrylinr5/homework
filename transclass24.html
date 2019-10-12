@@ -26,17 +26,44 @@
 
     <script>
         function init() {
-            $('#left').click(() => {
-                let source = $('#textleft').val()
-                let valure = "0";
-                trans(source, valure, true)
+            $('#left').click(function () {
+                let source = $('#textleft').val();
+                let valure = $('#select').val();
+                trans(source, valure, true);
 
             });
-            $('#right').click(() => {
-                let source = $('#textright').val()
-                let valure = "1";
-                trans(source, valure, false)
+            $('#right').click(function () {
+                let source = $('#textright').val();
+                let valure = "5";
+                trans(source, valure, false);
 
+            });
+            $('#select').change(function(){
+                if($('#select').val()=="0")
+                {
+                    $('#left').html("中翻英");
+                    $('#right').html("英翻中");
+                }
+                if($('#select').val()=="1")
+                {
+                    $('#left').html("中翻法");
+                    $('#right').html("法翻中");
+                }
+                if($('#select').val()=="2")
+                {
+                    $('#left').html("中翻德");
+                    $('#right').html("德翻中");
+                }
+                if($('#select').val()=="3")
+                {
+                    $('#left').html("中翻日");
+                    $('#right').html("日翻中");
+                }
+                if($('#select').val()=="4")
+                {
+                    $('#left').html("中翻韓");
+                    $('#right').html("韓翻中");
+                }
             });
         }
 
@@ -48,7 +75,7 @@
                     "Ocp-Apim-Subscription-Key": "4ffc83c1b35340fe92a5cc9d37360ad9",
                     "Content-Type": "application/json"
                 },
-                url: "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en&to=zh-Hant",
+                url: "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=en&to=fr&to=de&to=ja&to=ko&to=zh-Hant",
                 data: JSON.stringify([{
                     "Text": source
                 }]), //要翻譯的文字
@@ -73,7 +100,7 @@
     <div class="container-fluid text-center row" style="margin: 0 auto">
         <div class="card col-4 p-0">
             <div class="card-header bg-primary text-white h1">
-                中翻英
+                外語翻譯框
             </div>
             <div class="card-body">
                 <textarea id="textleft" class="form-control" cols="50" rows="8"></textarea>
@@ -90,12 +117,21 @@
                 <button id="right" class="btn btn-primary rotate-md-l-90" type="button"
                     style="font-size: 50px">英翻中</button>
             </div>
+            <div>
+                <select id="select">
+                    <option value="0">翻譯成英文</option>
+                    <option value="1">翻譯成法文</option>
+                    <option value="2">翻譯成德文</option>
+                    <option value="3">翻譯成日文</option>
+                    <option value="4">翻譯成韓文</option>
+                </select>
+            </div>
         </div>
 
 
         <div class="card col-4 p-0">
             <div class="card-header bg-primary text-white h1">
-                英翻中
+                中文翻譯框
             </div>
             <div class="card-body">
                 <textarea id="textright" class="form-control" cols="50" rows="8"></textarea>
