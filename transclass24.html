@@ -26,9 +26,11 @@
 
     <script>
         function init() {
+            $('#textleft').val(localStorage.getItem("a1"));
             $('#left').click(function () {
                 let source = $('#textleft').val();
                 let valure = $('#select').val();
+                localStorage.setItem("a1",source);
                 trans(source, valure, true);
 
             });
