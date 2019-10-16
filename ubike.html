@@ -153,6 +153,7 @@
         }
         function wherelocal() {
             area = $(this).val()
+            //.siblings()方法是(選擇)當下選擇器選取的東西以外的同一階層的標籤
             $(this).addClass('active').siblings().removeClass('active')
             initMap();
         }
