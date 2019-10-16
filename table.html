@@ -57,7 +57,7 @@
                 $('#EditField_TEL').val(CurrentEditItem[2]);
                 $('#EditField_Email').val(CurrentEditItem[3]);
                 $('#EditField_Address').val(CurrentEditItem[4]);
-                $('#EditField_other').val(CurrentEditItem[5]);
+                $('#EditField_other').importTags(CurrentEditItem[5]);
             });
             LoadData();
         }
