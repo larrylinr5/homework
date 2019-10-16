@@ -38,7 +38,7 @@
     <div class="container-fluid row h-100">
         <div class="col-2">
             <div class="list-group">
-                <input type="button" class="list-group-item list-group-item-action block active" value='全區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='全區'>
                 <input type="button" class="list-group-item list-group-item-action block" value='信義區'>
                 <input type="button" class="list-group-item list-group-item-action block" value='大安區'>
                 <input type="button" class="list-group-item list-group-item-action block" value='中山區'>
@@ -60,7 +60,7 @@
 
     
     <script>
-        var area = ''
+        var area = '全區'
         var map;
         $(function () {
             $('.block').click(wherelocal);
@@ -120,13 +120,13 @@
                 console.log("item is", item);
                 var single = {
                     position: new google.maps.LatLng(item.lat, item.lng),
-                    type: item.sbi < 10 ? 'ubikesmall' : 'ubike',
+                    type:  'ubike',
                     title: item.sbi + "/" + item.tot,
                 }
                 if (item.sbi < 10) {
                     single.type = 'bluebike'
                 }
-                if (item.sarea == area || area == '全區' || area == '') {
+                if (item.sarea == area || area == '全區' ) {
                     data.push(single)
                 }
 
@@ -154,7 +154,7 @@
         function wherelocal() {
             area = $(this).val()
             //.siblings()方法是(選擇)當下選擇器選取的東西以外的同一階層的標籤
-            $(this).addClass('active').siblings().removeClass('active')
+            //$(this).addClass('active').siblings().removeClass('active')
             initMap();
         }
     </script>
