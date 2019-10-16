@@ -25,7 +25,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <script>
-       
+      
         function init(){
             $('#ButtonSend').click(ButtonSend);
             $('#inputText').keypress(function(e){
@@ -40,7 +40,7 @@
         {
             source=$('#inputText').val();
             console.log("source is",source);
-            var ans = `<div class="row"><div class="col-3 ml-auto ">${source}:用戶圖片</div></div>`
+            var ans = `<div class="row"><div class="col-3 ml-auto ">${source}<img src="bike.png"></div></div>`
             $('#TalkContainer').append(ans);
             $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
             //$('#TalkContainer').append("<br>");
@@ -61,7 +61,7 @@
                     
                     test=ret;
                    
-                    $('#TalkContainer').append("客服圖片:"+test.answers[0].answer);
+                    $('#TalkContainer').append("<img src='bike_blue.png'>"+test.answers[0].answer);
                 },
                 error: function (err) {
                     //如果有錯
@@ -99,6 +99,8 @@
                 <input id="inputText" class="form-control" style="width:88%">
                 <button type="button" id="ButtonSend" class="btn btn-primary">送出</button>
             </form>
+            
+            
         </div>
         <div class="col-2"></div>
 </body>
