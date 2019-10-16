@@ -2,6 +2,15 @@
 <html>
 
 <head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
@@ -26,11 +35,35 @@
 </head>
 
 <body>
-    <div id="map"></div>
+    <div class="container-fluid row h-100">
+        <div class="col-2">
+            <div class="list-group">
+                <input type="button" class="list-group-item list-group-item-action block active" value='全區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='信義區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='大安區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='中山區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='松山區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='南港區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='中正區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='萬華區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='文山區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='大同區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='士林區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='內湖區'>
+                <input type="button" class="list-group-item list-group-item-action block" value='北投區'>
+            </div>
+        </div>
+        <div class="col-10">
+            <div id="map" class=""></div>
+        </div>
+    </div>
+
+    
     <script>
+        var area = ''
         var map;
         $(function () {
-
+            $('.block').click(wherelocal);
         });
 
         function initMap() {
@@ -40,7 +73,7 @@
             };
 
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 18,
+                zoom: 12,
                 center: myLatLng
             });
 
@@ -67,7 +100,7 @@
                     position: features[i].position,
                     icon: icons[features[i].type].icon,
                     map: map,
-                    title:features[i].title
+                    title: features[i].title
                 });
             };
         }
@@ -87,13 +120,15 @@
                 console.log("item is", item);
                 var single = {
                     position: new google.maps.LatLng(item.lat, item.lng),
-                    type: 'ubike',
-                    title:item.sbi+"/"+item.tot,
+                    type: item.sbi < 10 ? 'ubikesmall' : 'ubike',
+                    title: item.sbi + "/" + item.tot,
                 }
-                if(item.sbi<10){
-                    single.type= 'bluebike'
+                if (item.sbi < 10) {
+                    single.type = 'bluebike'
                 }
-                data.push(single);
+                if (item.sarea == area || area == '全區' || area == '') {
+                    data.push(single)
+                }
 
             });
             return data;
@@ -115,6 +150,11 @@
                 async: false,
             });
             return ublocation;
+        }
+        function wherelocal() {
+            area = $(this).val()
+            $(this).addClass('active').siblings().removeClass('active')
+            initMap();
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag&callback=initMap"
