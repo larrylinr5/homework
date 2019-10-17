@@ -61,7 +61,7 @@ LAB: 卡牌
 
         function ButtonStart() {
             $('img').prop('src','picture/back.png');
-            times=(10+Math.floor(Math.random()*50));//10~50次
+            times=(10+Math.floor(Math.random()*50));//10~60次
             time1=times; //測試用
             Cards[index].className="imgs";
             start();
@@ -87,7 +87,7 @@ LAB: 卡牌
             else
             {
                 $('#result').html(Cards[index].data.replace(".png",""));
-                $('#result').after("隨機times="+time1);
+                //$('#result').after("隨機times="+time1);
             }
         }
 
