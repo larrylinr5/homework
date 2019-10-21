@@ -41,10 +41,12 @@
 }
 </style>
 <script type="text/javascript">
+var fllag=false;
 var string1="<img src='Building.jpg' />";
 function pic1()
-{
-    
+{   
+    //fllag=0;
+    //fllag++;
     string1="<img src='Building.jpg' />";
     abc();
     $('#pic2').prop("disabled",true);
@@ -52,6 +54,8 @@ function pic1()
 }
 function pic2()
 {
+    //fllag=0;
+    //fllag++;
     string1="<img src='demo.png' />";
     abc();
     $('#pic2').prop("disabled",true);
@@ -59,8 +63,13 @@ function pic2()
 }
 $(function() {
     $('#pic2').click(pic2);
-	$('#pic1').click(pic1);
+    $('#pic1').click(pic1);
+    $('#flalagstar').click(flalagstar);
 });
+function flalagstar()
+{
+    fllag=true;
+}
 function abc(){
     //將位置轉成座標的換算表
 	var posConv = { };
@@ -108,8 +117,10 @@ function abc(){
         //console.log("children is",$("#dvPuzzle").children()[0].id)
         $.each($("#dvPuzzle").children(),function(key,value){
             var thisstring="Pic"+key;
-            if(thisstring==value.id)
+            console.log("f is",fllag )
+            if(thisstring==value.id&&fllag==true)
             {
+                console.log("f is",fllag )
                 anum++;
                 console.log("anum is",anum);
             }
@@ -140,21 +151,24 @@ function abc(){
 		return pool;
 	}
 	$("input:button").click(function() {
+        //fllag++;
 		for (var i = 0; i < 500; i++) {
 			var cells = $("#dvPuzzle div");
 			var toMove = getNearPos(cells.index($("#Pic0")[0]));
 			cells.eq(toMove[ parseInt(Math.random() * toMove.length) ]).click();
-		}
+        }
+        
 	});
 }
 </script>
 </head>
 <body>
 <input type="button" value="洗牌" />
+<button id="flalagstar">開始</button>
 <button id="pic1">圖1</button>
 <button id="pic2">圖2</button>
 
-<a href="" class="btn">重來</a>
+<a href="" type="button">重來</a>
 <div id="dvPuzzle"></div>
 </body>
 </html>
